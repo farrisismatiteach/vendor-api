@@ -4,7 +4,7 @@ resource "aws_lambda_function" "connect" {
   role = aws_iam_role.lambda_main.arn
   image_uri = "${local.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/connect:${var.image_tag}"
   package_type = "Image"
-  time = 30
+  timeout = 30
   environment {
     variables = {
         AWS_TABLE_NAME = "${var.websocket_table_name}"
@@ -26,7 +26,7 @@ resource "aws_lambda_function" "disconnect" {
   role = aws_iam_role.lambda_main.arn
   image_uri = "${local.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/disconnect:${var.image_tag}"
   package_type = "Image"
-  time = 30
+  timeout = 30
   environment {
     variables = {
         AWS_TABLE_NAME = "${var.websocket_table_name}"
@@ -48,7 +48,7 @@ resource "aws_lambda_function" "sendvendor" {
   role = aws_iam_role.lambda_main.arn
   image_uri = "${local.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/sendvendor:${var.image_tag}"
   package_type = "Image"
-  time = 30
+  timeout = 30
   environment {
     variables = {
         AWS_TABLE_NAME = "${var.websocket_table_name}"
@@ -77,7 +77,7 @@ resource "aws_lambda_function" "getvendors" {
   role = aws_iam_role.lambda_main.arn
   image_uri = "${local.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/getvendors:${var.image_tag}"
   package_type = "Image"
-  time = 30
+  timeout = 30
   environment {
     variables = {
         AWS_VENDOR_TABLE_NAME = "${var.vendor_table_name}"

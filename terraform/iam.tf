@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 
 resource "aws_iam_role" "lambda_main" {
     name = "${var.app_name}-lambda"
-    assume_role_policy = data.aws_iam_policy_document.assume_role_policy
+    assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
 resource "aws_iam_role_policy_attachment" "attach_exec_role" {
@@ -22,7 +22,7 @@ resource "aws_iam_role_policy_attachment" "attach_exec_role" {
 
 data "aws_iam_policy_document" "lambda_ws" {
     statement {
-      effect = "allow"
+      effect = "Allow"
       actions = [
         "execute-api:ManageConnects",
         "dynamodb:PutItem",

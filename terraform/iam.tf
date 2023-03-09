@@ -24,11 +24,12 @@ data "aws_iam_policy_document" "lambda_ws" {
     statement {
       effect = "Allow"
       actions = [
-        "execute-api:ManageConnects",
+        "execute-api:ManageConnections",
         "dynamodb:PutItem",
         "dynamodb:DeleteItem",
         "dynamodb:GetItem",
         "dynamodb:Scan",
+        "dynamodb:DescribeTable",
         "sqs:ReceiveMessage",
         "sqs:DeleteMessage",
         "sqs:GetQueueAttributes"

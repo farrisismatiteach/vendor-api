@@ -17,7 +17,7 @@ resource "aws_lambda_permission" "connect_permission" {
     action = "lambda:InvokeFunction"
     function_name = aws_lambda_function.connect.function_name
     principal = "apigateway.amazonaws.com"
-    # source_arn = ""
+    source_arn = "${aws_apigatewayv2_api.websocket_gw.execution_arn}/*/*"
 }
 
 # Disconnect
@@ -39,7 +39,7 @@ resource "aws_lambda_permission" "disconnect_permission" {
     action = "lambda:InvokeFunction"
     function_name = aws_lambda_function.disconnect.function_name
     principal = "apigateway.amazonaws.com"
-    # source_arn = ""
+    source_arn = "${aws_apigatewayv2_api.websocket_gw.execution_arn}/*/*"
 }
 
 # sendvendor
@@ -53,7 +53,7 @@ resource "aws_lambda_function" "sendvendor" {
     variables = {
         AWS_TABLE_NAME = "${var.websocket_table_name}"
         AWS_SQS_URL = "https://sqs.us-east-1.amazonaws.com/567192499845/vendor-twitter-queue"
-        # AWS_WEBSOCKET_URL = 
+        AWS_WEBSOCKET_URL = "${aws_apigatewayv2_api.websocket_gw.api_endpoint}/${var.api_gateway_stage_name}"
     }
   }
 }
@@ -90,5 +90,5 @@ resource "aws_lambda_permission" "getvendors_permission" {
     action = "lambda:InvokeFunction"
     function_name = aws_lambda_function.getvendors.function_name
     principal = "apigateway.amazonaws.com"
-    # source_arn = ""
+    source_arn = "${aws_apigatewayv2_api.http_gw.execution_arn}/*/*"
 }

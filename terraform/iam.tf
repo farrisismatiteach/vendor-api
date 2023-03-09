@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "lambda_ws" {
         "arn:aws:sqs:${var.aws_region}:${local.account_id}:${var.sqs_queue_name}",
         "arn:aws:dynamodb:${var.aws_region}:${local.account_id}:table/${var.websocket_table_name}",
         "arn:aws:dynamodb:${var.aws_region}:${local.account_id}:table/${var.vendor_table_name}",
-        # api gateway
+        "${aws_apigatewayv2_api.websocket_gw.execution_arn}/*"
       ]
     }
 }
